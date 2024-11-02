@@ -7,7 +7,7 @@ import App, { AppLoader } from "../App";
 
 import Login, { LoginLoader } from "../auth/Login";
 // import UserCreation from "../pages/CM/UserCreation";
-// import RegTrans from "../pages/AM/RegTrans";
+import RegTrans from "../pages/AM/RegTrans";
 // import UserAccess from "../pages/CM/UserAccess";
 // import CommonCode from "../pages/CM/CommonCode";
 
@@ -22,10 +22,10 @@ const router = createBrowserRouter([
                 element: <Dashboard />
             },
 
-            // {
-            //     path: 'GLAMT100100',
-            //     element: <RegTrans/>
-            // },
+            {
+                path: 'GLAMT100100',
+                element: <RegTrans/>
+            },
             // {
             //     path: 'UserCreation',
             //     element: <UserCreation/>

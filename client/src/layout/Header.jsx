@@ -7,9 +7,7 @@ import { AppBar, Box } from "@mui/material";
 import MuiLogo from "../components/MuiLogo";
 import ColorSchemeToggle from "../components/ColorSchemeToggle";
 
-export default function Header({onToggleTheme} ) {
-
-
+export default function Header({ onToggleTheme, mode }) {
   return (
     <AppBar
       sx={{
@@ -24,46 +22,20 @@ export default function Header({onToggleTheme} ) {
         gap: 1,
         borderBottom: "1px solid",
         borderColor: "background.level1",
-        // boxShadow: "sm",
-        // background: "#1565c0",
-        boxShadow:"none"
+        boxShadow: "none",
       }}
     >
-
-
-      
-      <GlobalStyles
-        styles={(theme) => ({
-          ":root": {
-            "--Sidebar-width": "120px",
-            "--Header-height": "50px",
-            [theme.breakpoints.up("sm")]: {
-              "--Header-height": "50px",
-            },
-            [theme.breakpoints.up("md")]: {
-              "--Header-height": "60px",
-            },
-          },
-        })}
-      />
-
       <Box
         sx={{
-          // width: "var(--Sidebar-width)",
-          width:"100%",
+          width: "100%",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-         
         }}
       >
-        <span>
-          <MuiLogo />
-        </span>
+        <MuiLogo />
 
-        <span>
-        <ColorSchemeToggle onClick={onToggleTheme} />
-        </span>
+        <ColorSchemeToggle onClick={onToggleTheme} mode={mode} /> {/* Pass mode here */}
 
         <IconButton
           onClick={() => toggleSidebar()}
@@ -79,7 +51,7 @@ export default function Header({onToggleTheme} ) {
             ":hover": {
               backgroundColor: "rgba(255, 255, 255, 0.9)",
             },
-            fontSize:"10px"
+            fontSize: "10px",
           }}
         >
           <MenuRoundedIcon />

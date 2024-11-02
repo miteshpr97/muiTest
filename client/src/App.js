@@ -18,7 +18,12 @@ function App() {
     const token = Cookies.get('token');
     let decodedToken;
 
-    const [mode, setMode] = useState(localStorage.getItem('mode') || 'light');
+
+    const [mode, setMode] = useState('light'); // Initial theme mode
+
+    const toggleTheme = () => {
+      setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    };
 
     const getAdmin = async (id) => {
         const admin = await configServ.getAdminById(id);
@@ -63,12 +68,6 @@ function App() {
     });
 
 
-    // Function to toggle the theme
-    const toggleTheme = () => {
-        const newMode = mode === 'light' ? 'dark' : 'light';
-        setMode(newMode);
-        localStorage.setItem('mode', newMode); // Save the mode to local storage
-    };
 
 
     return (
@@ -77,7 +76,7 @@ function App() {
             <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
             
                
-                {location.pathname !== '/login' && <Header onToggleTheme={toggleTheme} />}
+                {location.pathname !== '/login' && <Header onToggleTheme={toggleTheme} mode={mode} />            }
                 {location.pathname !== '/login' && <Sidebar />}
                 <Box
                     component="main"

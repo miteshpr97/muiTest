@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { NavLink, useLocation } from "react-router-dom";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
+// import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import Cookies from "js-cookie";
 import userContext from "../context/userContext/userContext";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
@@ -23,6 +24,8 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance"; // sample icon
 import SettingsIcon from "@mui/icons-material/Settings";
+import ListIcon from '@mui/icons-material/List';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 export default function Sidebar() {
   const theme = useTheme();
@@ -98,10 +101,7 @@ export default function Sidebar() {
     },
   ];
 
-  const iconMap = {
-    AM: <AccountBalanceIcon />,
-    CM: <SettingsIcon />,
-  };
+ 
 
   const groupedMenuData = menuData.reduce((acc, item) => {
     const { MODULE_NM, MENU_NM } = item;
@@ -126,6 +126,7 @@ export default function Sidebar() {
             onClick={() => handleToggle(menuName)}
             sx={{
               padding: "3px 16px",
+              marginLeft:"7px",
               "&:hover": { backgroundColor: theme.palette.action.hover },
               "&.Mui-selected": {
                 backgroundColor: theme.palette.action.selected,
@@ -133,7 +134,9 @@ export default function Sidebar() {
               },
             }}
           >
-            <ListItemText primary={menuName} sx={{ fontSize: "14px" }} />
+              <ListAltIcon sx={{ fontSize: 16, marginRight: 0.5 }} />
+
+            <ListItemText primary={menuName} sx={{ "& .MuiListItemText-primary": { fontSize: "0.85rem" } }}/>
             {openModules[menuName] ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={openModules[menuName]} timeout="auto" unmountOnExit>
@@ -146,6 +149,8 @@ export default function Sidebar() {
                     selected={location.pathname === page.PAGE_LNK}
                     sx={{
                       padding: "3px 16px",
+                      marginLeft:"27px",
+                      marginRight:"16px",
                       "&.active": {
                         backgroundColor: theme.palette.action.selected,
                         color: theme.palette.primary.main,
@@ -156,9 +161,11 @@ export default function Sidebar() {
                       },
                     }}
                   >
+              {/* <DashboardRoundedIcon sx={{ fontSize: 16, marginRight: 0.5 }} /> */}
+
                     <ListItemText
                       primary={page.PAGE_NM}
-                      sx={{ fontSize: "13px" }}
+                      sx={{ "& .MuiListItemText-primary": { fontSize: "0.75rem" } }}
                     />
                   </ListItemButton>
                 </ListItem>
@@ -220,15 +227,16 @@ export default function Sidebar() {
           sx={{
             gap: 1,
             "--List-nestedInsetStart": "20px",
+            padding: "0px",
           }}
         >
-          <ListItem>
+          <ListItem style={{padding:"7px 10px"}}>
             <ListItemButton
               component={NavLink}
               to="/"
               selected={location.pathname === "/"}
               sx={{
-                padding: "3px 16px",
+                padding: "3px 6px",
                 "&.active": {
                   backgroundColor: theme.palette.action.selected,
                   color: theme.palette.primary.main,
@@ -236,7 +244,7 @@ export default function Sidebar() {
                 },
               }}
             >
-              <DashboardRoundedIcon sx={{ fontSize: 18, marginRight: 1 }} />
+              <DashboardRoundedIcon sx={{ fontSize: 17, marginRight: 0.5 }} />
               <ListItemText
                 primary="Dashboard"
                 sx={{ "& .MuiListItemText-primary": { fontSize: "0.875rem" } }}
@@ -253,6 +261,8 @@ export default function Sidebar() {
                   "&:hover": { backgroundColor: theme.palette.action.hover },
                 }}
               >
+                <ListIcon sx={{ fontSize: 17, marginRight: 0.5 }} />
+
                 <ListItemText
                   primary={moduleName}
                   sx={{
@@ -305,4 +315,3 @@ export default function Sidebar() {
     </Drawer>
   );
 }
-
